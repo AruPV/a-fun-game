@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dci01joxxofjl"]
+
+[ext_resource type="Script" path="res://scripts/card/CardBase.gd" id="1_agy4e"]
+[ext_resource type="Script" path="res://scripts/card/CardRepresentation.gd" id="2_f8y04"]
+[ext_resource type="Texture2D" uid="uid://c2dqlw862ijnv" path="res://assets/png-clipart-playing-card-card-game-poker-ace-of-spades-suit-cards-game-angle.png" id="3_bdtbj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_443we"]
+
+[node name="card" type="Node2D"]
+scale = Vector2(0.205, 0.205)
+
+[node name="card_control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 364.0
+offset_top = 319.0
+offset_right = 404.0
+offset_bottom = 359.0
+script = ExtResource("1_agy4e")
+metadata/_edit_use_anchors_ = true
+
+[node name="representation" type="Area2D" parent="."]
+script = ExtResource("2_f8y04")
+
+[node name="Sprite2D" type="Sprite2D" parent="representation"]
+texture = ExtResource("3_bdtbj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="representation"]
+scale = Vector2(45.295, 64.99)
+shape = SubResource("RectangleShape2D_443we")

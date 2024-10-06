@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=4 uid="uid://drmk1ih101lmi"]
+
+[ext_resource type="Script" path="res://scripts/GameRound.gd" id="1_q08wy"]
+[ext_resource type="Script" path="res://scripts/grid/GameGrid.gd" id="2_v71oo"]
+[ext_resource type="Texture2D" uid="uid://ct8weiyd7srel" path="res://assets/Land.png" id="3_a3iwl"]
+[ext_resource type="Script" path="res://scripts/grid/Grass.gd" id="4_hrkt0"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_laqpc"]
+texture = ExtResource("3_a3iwl")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_yidfo"]
+sources/0 = SubResource("TileSetAtlasSource_laqpc")
+
+[node name="game" type="Node2D"]
+script = ExtResource("1_q08wy")
+
+[node name="game_grid" type="Node2D" parent="."]
+texture_filter = 1
+script = ExtResource("2_v71oo")
+
+[node name="grass_layer" type="TileMapLayer" parent="game_grid"]
+scale = Vector2(4.94, 4.94)
+tile_map_data = PackedByteArray("AAAAAP//AAABAAAAAAD/////AAABAAEAAAABAP//AAACAAIAAAD+////AAAAAAEAAAD+/wAAAAADAAEAAAD//wAAAAADAAAAAAAAAAAAAAACAAIAAAABAAAAAAAAAAAAAAABAP7/AAAAAAAAAAAAAP7/AAADAAIAAAD///7/AAABAAIAAAD+//7/AAAAAAIAAAD+/wEAAAABAAAAAAD//wEAAAADAAMAAAAAAAEAAAABAAMAAAABAAEAAAAAAAMAAAA=")
+tile_set = SubResource("TileSet_yidfo")
+script = ExtResource("4_hrkt0")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Points" type="RichTextLabel" parent="."]
+offset_left = 257.0
+offset_top = -74.0
+offset_right = 297.0
+offset_bottom = -34.0
+text = "0"
+
+[node name="Button" type="Button" parent="."]
+offset_left = -291.0
+offset_top = -48.0
+offset_right = -210.0
+offset_bottom = -17.0
+text = "next turn"
+
+[connection signal="button_up" from="Button" to="." method="_on_button_button_up"]
