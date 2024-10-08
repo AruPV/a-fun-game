@@ -16,14 +16,22 @@ func point_calculation() -> int:
 	for key in plant_dict:
 		var cur_plant = plant_dict[key] as Plant
 		var hypothetical_positions = cur_plant.effect_positions()
+		print(hypothetical_positions)
+		var valid_positions = valid_cells(hypothetical_positions)
+		print(valid_positions)
 		point_output += cur_plant.act(valid_cells(hypothetical_positions))
 	return point_output
 
 func valid_cells(hypothetical_neighbours: Array) -> Array:
 	var real_neighbours = []
 	for neighbour_point in hypothetical_neighbours:
+		print(neighbour_point)
+		print(plant_dict)
 		var is_valid = grass_layer.get_cell_source_id(neighbour_point) != -1
+		print(is_valid)
+		print(plant_dict.get(neighbour_point))
 		if is_valid && plant_dict.get(neighbour_point) != null:
+			print("valid")
 			real_neighbours.append(plant_dict[neighbour_point])
 	return real_neighbours
 
@@ -35,8 +43,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			var grass_global = grass_layer.to_global(grass_local)
 			if (plant_dict.get(map_pos)== null):
 				var scene = load("res://scenes/plants/plant.tscn")
-				var scene_instance = scene.instantiate()
+				var scene_instance = scene.instantiate() as Plant
 				scene_instance.set_name("plant")
+				scene_instance.grid_position = map_pos
 				add_child(scene_instance)
 				plant_dict[map_pos] = scene_instance
 				scene_instance.position = grass_global
